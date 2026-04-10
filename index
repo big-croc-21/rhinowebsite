@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhino Lab</title>
+  <meta name="description" content="Lift, Track, Analyze, Repeat. Rhino Lab helps lifters log workouts, level up, and see real progress without the clutter." />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #0d0d0d;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 10;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: #ffffff;
+      color: #111111;
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #ffffff;
+    }
+    .hero {
+      padding: 88px 0 72px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: #b7b7b7;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1.02;
+      margin-bottom: 18px;
+    }
+    .hero p {
+      color: #d1d1d1;
+      font-size: 1.08rem;
+      max-width: 600px;
+      margin-bottom: 28px;
+    }
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .phone {
+      background: linear-gradient(180deg, #1b1b1b 0%, #101010 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+      max-width: 360px;
+      margin-inline: auto;
+    }
+    .screen {
+      border-radius: 20px;
+      padding: 18px;
+      background: #f5f5f5;
+      color: #111;
+      min-height: 560px;
+    }
+    .mock-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .level-card {
+      background: #111;
+      color: white;
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .level-number {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .mini-box {
+      background: white;
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid #e8e8e8;
+    }
+    section {
+      padding: 70px 0;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      color: #bdbdbd;
+      max-width: 700px;
+      margin-bottom: 34px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .card {
+      background: #151515;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 24px;
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+    .card p {
+      color: #c4c4c4;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: white;
+      color: #111;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .store-box {
+      background: linear-gradient(180deg, #171717 0%, #101010 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+    }
+    footer {
+      padding: 30px 0 50px;
+      color: #9e9e9e;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    @media (max-width: 900px) {
+      .hero-grid, .features, .steps {
+        grid-template-columns: 1fr;
+      }
+      .nav-links a:not(.btn) {
+        display: none;
+      }
+      .hero {
+        padding-top: 56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">RHINO LAB</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#download" class="btn btn-primary">Download</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Fitness tracking for lifters</div>
+          <h1>Lift, Track, Analyze, Repeat.</h1>
+          <p>
+            Rhino Lab helps you log workouts fast, see your progress clearly, and level up your training without the clutter and fluff of traditional fitness apps.
+          </p>
+          <div class="cta-row">
+            <a href="#download" class="btn btn-primary">Get the App</a>
+            <a href="#features" class="btn btn-secondary">See Features</a>
+          </div>
+        </div>
+
+        <div class="phone">
+          <div class="screen">
+            <div class="mock-top">
+              <span>Rhino Lab</span>
+              <span>Level Up</span>
+            </div>
+            <div class="level-card">
+              <div style="opacity:.75; margin-bottom: 10px;">Current Level</div>
+              <div class="level-number">12</div>
+              <div style="margin-top: 10px; opacity:.85;">Keep training. Keep climbing.</div>
+            </div>
+            <div class="mini-grid">
+              <div class="mini-box">
+                <strong>Chest Day</strong><br>
+                5 exercises logged
+              </div>
+              <div class="mini-box">
+                <strong>Volume</strong><br>
+                8,420 lbs
+              </div>
+              <div class="mini-box">
+                <strong>Streak</strong><br>
+                6 sessions
+              </div>
+              <div class="mini-box">
+                <strong>Progress</strong><br>
+                +11% this month
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">Why Rhino Lab</h2>
+        <p class="section-sub">
+          Built for people who actually lift. No bloated setup. No confusing flow. Just fast logging, clear data, and a system that makes progress feel rewarding.
+        </p>
+        <div class="features">
+          <div class="card">
+            <h3>Fast Workout Logging</h3>
+            <p>Track exercises, sets, reps, and weight quickly so your app helps your training instead of slowing it down.</p>
+          </div>
+          <div class="card">
+            <h3>Clear Progress Charts</h3>
+            <p>See how your training changes over time with simple visuals that actually tell you whether you are improving.</p>
+          </div>
+          <div class="card">
+            <h3>Level Up System</h3>
+            <p>Turn your gym progress into something visual and motivating so staying consistent feels more like a game.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
+      <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">Simple enough to use every day. Powerful enough to keep you consistent.</p>
+        <div class="steps">
+          <div class="card">
+            <div class="step-number">1</div>
+            <h3>Log your workouts</h3>
+            <p>Choose your exercises, enter your sets, reps, and weight, and save your work in seconds.</p>
+          </div>
+          <div class="card">
+            <div class="step-number">2</div>
+            <h3>Track your progress</h3>
+            <p>Review past performance and spot patterns in strength, volume, and consistency.</p>
+          </div>
+          <div class="card">
+            <div class="step-number">3</div>
+            <h3>Level up over time</h3>
+            <p>Watch your training build momentum with a system designed to make progress visible and motivating.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="container">
+        <div class="store-box">
+          <h2 class="section-title">Start building your final form</h2>
+          <p class="section-sub" style="margin-inline:auto; margin-bottom:24px;">
+            Rhino Lab is built for lifters who want less noise and better progress tracking.
+          </p>
+          <div class="cta-row" style="justify-content:center;">
+            <a class="btn btn-primary" href="https://apps.apple.com/" target="_blank" rel="noopener">Download on the App Store</a>
+            <a class="btn btn-secondary" href="mailto:hello@rhinolab.app">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Rhino Lab. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
