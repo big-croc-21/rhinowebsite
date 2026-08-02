@@ -204,22 +204,6 @@
     }
     .sticky-cta .btn { width: 100%; }
 
-    /* --- In-app browser escape banner (hidden unless needed) --- */
-    .escape-banner {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: #fff;
-      color: #111;
-      padding: 12px 16px;
-      font-size: 0.92rem;
-      text-align: center;
-      font-weight: 600;
-    }
-    .escape-banner strong { text-decoration: underline; }
-    .escape-banner.is-visible { display: block; }
-
     @media (max-width: 900px) {
       .hero-grid, .features, .steps {
         grid-template-columns: 1fr;
@@ -233,16 +217,13 @@
   </style>
 </head>
 <body>
-  <div id="escapeBanner" class="escape-banner">
-    Stuck in this preview? Tap <strong>⋯</strong> in the top right and choose <strong>Open in Safari</strong> to download.
-  </div>
   <header>
     <div class="container nav">
       <a href="#" class="brand">RHINO LAB</a>
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
-        <a class="btn btn-primary" href="https://apps.apple.com/us/app/rhino-lab/id6754617994">Download</a>
+        <a class="btn btn-primary" href="https://apps.apple.com/us/app/rhino-lab/id6754617994" data-store-link>Download</a>
       </div>
     </div>
   </header>
@@ -257,7 +238,7 @@
             Rhino Lab helps you log workouts fast, see your progress clearly, and level up your training without the clutter and fluff of traditional fitness apps.
           </p>
           <div class="cta-row">
-            <a class="btn btn-store" href="https://apps.apple.com/us/app/rhino-lab/id6754617994">
+            <a class="btn btn-store" href="https://apps.apple.com/us/app/rhino-lab/id6754617994" data-store-link>
               <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M16.365 1.43c0 1.14-.462 2.16-1.213 2.914-.83.83-2.02 1.42-3.03 1.34-.13-1.1.44-2.24 1.19-2.97.83-.83 2.24-1.44 3.05-1.28zM20.5 17.34c-.5 1.15-.74 1.67-1.39 2.68-.9 1.4-2.17 3.15-3.75 3.16-1.4.02-1.77-.9-3.67-.89-1.9.01-2.31.9-3.71.88-1.58-.02-2.78-1.6-3.68-3-2.52-3.9-2.78-8.48-1.23-10.92 1.1-1.74 2.83-2.76 4.45-2.76 1.65 0 2.69.9 4.06.9 1.32 0 2.13-.9 4.05-.9 1.44 0 2.97.79 4.06 2.15-3.57 1.96-2.99 7.08.81 8.7z"/>
               </svg>
@@ -331,7 +312,7 @@
             Rhino Lab is built for lifters who want less noise and better progress tracking.
           </p>
           <div class="cta-row" style="justify-content:center;">
-            <a class="btn btn-store" href="https://apps.apple.com/us/app/rhino-lab/id6754617994">
+            <a class="btn btn-store" href="https://apps.apple.com/us/app/rhino-lab/id6754617994" data-store-link>
               <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M16.365 1.43c0 1.14-.462 2.16-1.213 2.914-.83.83-2.02 1.42-3.03 1.34-.13-1.1.44-2.24 1.19-2.97.83-.83 2.24-1.44 3.05-1.28zM20.5 17.34c-.5 1.15-.74 1.67-1.39 2.68-.9 1.4-2.17 3.15-3.75 3.16-1.4.02-1.77-.9-3.67-.89-1.9.01-2.31.9-3.71.88-1.58-.02-2.78-1.6-3.68-3-2.52-3.9-2.78-8.48-1.23-10.92 1.1-1.74 2.83-2.76 4.45-2.76 1.65 0 2.69.9 4.06.9 1.32 0 2.13-.9 4.05-.9 1.44 0 2.97.79 4.06 2.15-3.57 1.96-2.99 7.08.81 8.7z"/>
               </svg>
@@ -356,7 +337,7 @@
 
   <!-- Persistent download bar for mobile visitors -->
   <div class="sticky-cta">
-    <a class="btn btn-store" href="https://apps.apple.com/us/app/rhino-lab/id6754617994">
+    <a class="btn btn-store" href="https://apps.apple.com/us/app/rhino-lab/id6754617994" data-store-link>
       <svg class="apple-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M16.365 1.43c0 1.14-.462 2.16-1.213 2.914-.83.83-2.02 1.42-3.03 1.34-.13-1.1.44-2.24 1.19-2.97.83-.83 2.24-1.44 3.05-1.28zM20.5 17.34c-.5 1.15-.74 1.67-1.39 2.68-.9 1.4-2.17 3.15-3.75 3.16-1.4.02-1.77-.9-3.67-.89-1.9.01-2.31.9-3.71.88-1.58-.02-2.78-1.6-3.68-3-2.52-3.9-2.78-8.48-1.23-10.92 1.1-1.74 2.83-2.76 4.45-2.76 1.65 0 2.69.9 4.06.9 1.32 0 2.13-.9 4.05-.9 1.44 0 2.97.79 4.06 2.15-3.57 1.96-2.99 7.08.81 8.7z"/>
       </svg>
@@ -364,28 +345,9 @@
     </a>
   </div>
 
+  <script src="escape.js"></script>
   <script>
-    (function () {
-      var APP_STORE_URL = "https://apps.apple.com/us/app/rhino-lab/id6754617994";
-
-      // Detect the common in-app browsers that swallow App Store links.
-      var ua = navigator.userAgent || "";
-      var isInApp = /Instagram|FBAN|FBAV|Line\/|MicroMessenger|TikTok|musical_ly|Twitter|Snapchat/i.test(ua);
-
-      if (!isInApp) return; // real Safari/Chrome: normal taps already work fine
-
-      document.documentElement.classList.add("in-app-browser");
-
-      // No reliable silent auto-escape exists right now — the Shortcuts
-      // x-callback trick throws a visible "Couldn't Find Shortcut" system
-      // error instead of quietly redirecting, which is worse than doing
-      // nothing. So: skip automatic tricks entirely, and immediately show
-      // the one path that's actually guaranteed to work every time —
-      // Instagram's own "Open in Safari" menu — plus the real tap-through
-      // button as a second option.
-      var banner = document.getElementById("escapeBanner");
-      if (banner) banner.classList.add("is-visible");
-    })();
+    RhinoLabEscape.wireStoreLinks("[data-store-link]");
   </script>
 </body>
 </html>
