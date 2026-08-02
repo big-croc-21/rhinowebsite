@@ -204,6 +204,22 @@
     }
     .sticky-cta .btn { width: 100%; }
 
+    /* --- In-app browser escape banner (hidden unless needed) --- */
+    .escape-banner {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: #fff;
+      color: #111;
+      padding: 12px 16px;
+      font-size: 0.92rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    .escape-banner strong { text-decoration: underline; }
+    .escape-banner.is-visible { display: block; }
+
     @media (max-width: 900px) {
       .hero-grid, .features, .steps {
         grid-template-columns: 1fr;
@@ -217,6 +233,9 @@
   </style>
 </head>
 <body>
+  <div id="escapeBanner" class="escape-banner">
+    Stuck in this preview? Tap <strong>⋯</strong> in the top right and choose <strong>Open in Safari</strong> to download.
+  </div>
   <header>
     <div class="container nav">
       <a href="#" class="brand">RHINO LAB</a>
@@ -344,5 +363,43 @@
       <span>Download on the App Store</span>
     </a>
   </div>
+
+  <script>
+    (function () {
+      var APP_STORE_URL = "https://apps.apple.com/us/app/rhino-lab/id6754617994";
+
+      // Detect the common in-app browsers that swallow App Store links.
+      var ua = navigator.userAgent || "";
+      var isInApp = /Instagram|FBAN|FBAV|Line\/|MicroMessenger|TikTok|musical_ly|Twitter|Snapchat/i.test(ua);
+
+      if (!isInApp) return; // real Safari/Chrome: normal taps already work fine
+
+      document.documentElement.classList.add("in-app-browser");
+
+      // "Browser escape" attempt: calling a Shortcut that doesn't exist
+      // triggers an error callback (x-error), and iOS opens that URL in
+      // Safari to report the error. Unofficial, unintended use of Apple's
+      // x-callback-url system — works today, not guaranteed to keep working
+      // forever, and some in-app browsers may block it outright.
+      function attemptShortcutsEscape(targetUrl) {
+        var fakeShortcutName = "escape-" + Math.random().toString(36).slice(2);
+        var link =
+          "shortcuts://x-callback-url/run-shortcut?name=" +
+          encodeURIComponent(fakeShortcutName) +
+          "&x-error=" +
+          encodeURIComponent(targetUrl);
+        window.location.href = link;
+      }
+
+      attemptShortcutsEscape(APP_STORE_URL);
+
+      // If we're still here after a beat, the auto-attempt didn't take —
+      // reveal the guaranteed manual fallback instead of leaving a dead end.
+      setTimeout(function () {
+        var banner = document.getElementById("escapeBanner");
+        if (banner) banner.classList.add("is-visible");
+      }, 1200);
+    })();
+  </script>
 </body>
 </html>
