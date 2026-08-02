@@ -376,29 +376,15 @@
 
       document.documentElement.classList.add("in-app-browser");
 
-      // "Browser escape" attempt: calling a Shortcut that doesn't exist
-      // triggers an error callback (x-error), and iOS opens that URL in
-      // Safari to report the error. Unofficial, unintended use of Apple's
-      // x-callback-url system — works today, not guaranteed to keep working
-      // forever, and some in-app browsers may block it outright.
-      function attemptShortcutsEscape(targetUrl) {
-        var fakeShortcutName = "escape-" + Math.random().toString(36).slice(2);
-        var link =
-          "shortcuts://x-callback-url/run-shortcut?name=" +
-          encodeURIComponent(fakeShortcutName) +
-          "&x-error=" +
-          encodeURIComponent(targetUrl);
-        window.location.href = link;
-      }
-
-      attemptShortcutsEscape(APP_STORE_URL);
-
-      // If we're still here after a beat, the auto-attempt didn't take —
-      // reveal the guaranteed manual fallback instead of leaving a dead end.
-      setTimeout(function () {
-        var banner = document.getElementById("escapeBanner");
-        if (banner) banner.classList.add("is-visible");
-      }, 1200);
+      // No reliable silent auto-escape exists right now — the Shortcuts
+      // x-callback trick throws a visible "Couldn't Find Shortcut" system
+      // error instead of quietly redirecting, which is worse than doing
+      // nothing. So: skip automatic tricks entirely, and immediately show
+      // the one path that's actually guaranteed to work every time —
+      // Instagram's own "Open in Safari" menu — plus the real tap-through
+      // button as a second option.
+      var banner = document.getElementById("escapeBanner");
+      if (banner) banner.classList.add("is-visible");
     })();
   </script>
 </body>
